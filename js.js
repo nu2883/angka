@@ -144,7 +144,7 @@ var app = new Vue({
         this.mulai();
         setTimeout(
             this.waktuhabis, 
-        10000);
+        60000);
         
       },
       selesai(){
