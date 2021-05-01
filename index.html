@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vue Calculator</title>
+    <!-- development version, includes helpful console warnings -->
+    <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+
+    <style>
+
+
+        
+        *,*::before, *:after{
+            box-sizing: border-box;
+        }
+        body{
+            background-image: url("https://images.pexels.com/photos/1743165/pexels-photo-1743165.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940");
+            background-size: cover;
+            color: rgba(255, 255, 255, 0.5);
+            font-family: sans-serif;
+            width: 100vw;
+            height: 100vh;
+            position: fixed;
+            top: 0;
+            left: 0;
+            display: flex;
+            justify-content: center;
+            align-items: flex-end;
+            font-size: 20px;
+            text-align: center;
+
+        }
+
+        .calculator{
+            width: 320px;
+            background-color: rgba(255,255,255, 0.1);
+            border-radius: 5px;
+            padding: 20px;
+            height: 80px;
+            font-size: 40px;
+        }
+
+        .warning{
+            width: 320px;
+            /* background-color: rgba(255,255,255, 0.1); */
+            border-radius: 5px;
+            color: red;
+            padding: 20px;
+        }
+
+        .button{
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            width: 280px;
+        }
+
+        .btn{
+            flex: 0 0 93px;
+            height: 63px;
+            border: 1px solid transparent;
+            line-height: 61px;
+            transition: all 0.8s;
+            border-radius: 3px;
+        }
+        .btnc{
+            flex: 0 0 93px;
+            height: 63px;
+            border: 1px solid transparent;
+            line-height: 61px;
+            transition: all 0.8s;
+            border-radius: 3px;
+            color:red;
+        }
+
+        .btnc:hover{
+            background-color: rgba(221, 73, 73, 0.815);
+            border-color: rgba(252, 3, 3, 0.89);
+            color: white;
+            cursor: pointer;
+            transition: all 0.15s;
+        }
+        .btn1{
+            flex: 0 0 93px;
+            height: 63px;
+            border: 1px solid transparent;
+            line-height: 61px;
+            transition: all 0.8s;
+            border-radius: 3px;
+            color:greenyellow;
+        }
+
+        .btn1:hover{
+            background-color: rgba(73, 221, 86, 0.815);
+            border-color: rgba(74, 252, 3, 0.89);
+            color: white;
+            cursor: pointer;
+            transition: all 0.15s;
+        }
+
+        .btn:hover{
+            background-color: rgba(255, 255,255, 0.5);
+            border-color: rgba(255, 255, 255, 0.2);
+            color: white;
+            cursor: pointer;
+            transition: all 0.15s;
+        }
+
+        .calc{
+            height: 30px;
+            line-height: 30px;
+        }
+
+        .value{
+            height: 50px;
+            line-height: 50px;
+            color: white;
+            font-size: 30px;
+        }
+
+        .point{
+            color: whitesmoke;
+            font-size: 40px;
+            font-weight: 400;
+        }
+        .loading{
+            width: 100%;
+            height: 100vh;
+            top: 0;
+            left: 0;
+            bottom: 0;
+            right: 0;
+            background-color:lightskyblue;
+            /* opacity: 0.4; */
+            position: absolute;
+        }
+
+
+
+
+    </style>
+</head>
+<body>
+    <div id="app">
+        <span class="point">point : {{totalpoint}}</span> <br> <br>
+        <div v-if="showWarning" class="warning">
+            {{warning}}
+        </div>      
+<!-- <br>{{soal_ke}} soal ke
+
+<br>{{klik1}} klik1
+<br>{{klik2}} klik2
+
+point :  {{point}} -->
+        <!-- {{showWarning}} -->
+        <div class="calculator">
+            {{angka1}} x {{angka2}}
+        </div>        <br>
+       <div class="calculator">
+           {{calc}}
+       </div>
+       <div class="value">
+           {{value}}
+       </div>
+
+       <div class="button">
+           <div v-for="x in 9" @click="setMod(x-1)" class="btn">{{x}}</div>
+           <div @click="reset()" class="btnc">Hapus</div>
+           <div @click="setMod(-1)" class="btn">0</div>
+           <div v-if="start" @click="mstart()" class="btn1">Mulai</div>
+           <div v-if="!start" @click="enter()" class="btn1">Jawab</div>
+           <div v-for=" x in 4"class="btn"></div>
+
+       </div>
+
+
+       <!-- FORM LOADING -->
+<div v-if="loading" class="loading text-center" >
+    <h2 style="margin-top: 20vh; color:red;">Waktu Habis</h2>
+    <h2 class="point">Total Point Anda :</h2>
+    <h1 class="point">{{totalpoint}}</h1>
+    <h3>Terima Kasih</h3>
+    <div class="btn1">Simpan Data</div>
+    <div @click="selesai" class="btnc">Close</div>
+</div>
+
+
+
+    </div>
+
+
+<script>
+
+var app = new Vue({
+  el: '#app',
+  data: {
+    message: 'Hello Vue!',
+    loading:false,
+    calc:'',
+    value:null,
+    angka1:0,
+    angka2:0,
+    kunci:'',
+    warning:'',
+    showWarning:false,
+    waktuawal:'',
+    waktujawab:[],
+    totalpoint:0,
+    start:true,
+    klik1:'',
+    klik2:'',
+    soal_ke:0,
+    
+
+  },
+  computed:{
+    point(){
+        let point1 = 0;
+        let po = 0;
+        let po1 = 0;
+        if(this.klik1  && this.klik2 ){
+            if(this.soal_ke % 2 == 0){
+                po = this.klik2 - this.klik1;
+                
+            }if(this.soal_ke % 2 != 0){
+                po = this.klik1 - this.klik2;
+            }
+            po1 = (10000-po);
+        }
+        point1 +=po1;
+        return point1 ;
+    }
+  },
+  methods:{
+      setMod(x){
+          this.calc += x+1
+      },
+      reset(){
+          this.value = null
+          this.calc = ''
+      },
+      clearWarning(){
+        this.showWarning = false;
+        this.warning = '';
+      },
+      enter(){
+        if(this.calc == this.kunci){
+            let wakt = new Date().getTime();
+            this.waktujawab.push(wakt);
+            
+
+            if(this.soal_ke % 2 == 0){
+                this.klik1 = wakt;
+            }if(this.soal_ke % 2 != 0){
+                this.klik2 = wakt;
+            }
+
+
+            
+            this.totalpoint += 10 ;
+            this.warning = '';
+            // alert('benar')
+            this.calc = ''
+            let angka1 = Math.floor(Math.random() * 9) + 1;
+            let angka2 = Math.floor(Math.random() * 9) + 1;
+            
+            this.angka1 = angka1;
+            this.angka2 = angka2;
+            this.kunci = angka1*angka2; 
+            
+            
+            this.soal_ke +=1;
+        }
+        else{
+        this.warning = 'Salah';
+        this.showWarning = true;
+        this.calc = '';
+        setTimeout(
+            this.clearWarning, 
+        2000);
+        }
+
+
+      },
+      mulai(){
+          let angka1 = Math.floor(Math.random() * 9) + 1;
+          let angka2 = Math.floor(Math.random() * 9) + 1;
+    
+          this.angka1 = angka1;
+          this.angka2 = angka2;
+          this.kunci = angka1*angka2;
+
+          let wakt = new Date().getTime();
+          this.klik2 = wakt;
+
+    
+      },
+      waktuhabis(){
+        // alert('waktuhabis')
+        this.loading = true;
+      },
+      mstart(){
+        this.start=false; 
+        this.mulai();
+        setTimeout(
+            this.waktuhabis, 
+        60000);
+        
+      },
+      selesai(){
+          this.loading = false;
+          this.totalpoint = 0;
+          this.angka1 = 0;
+          this.angka2 = 0;
+          this.klik1 = 0;
+          this.klik2 = 0;
+          this.start = true;
+          this.calc = '';
+
+    
+      }
+
+  },
+
+  watch: {
+        soal_ke(){
+            this.totalpoint += this.point;
+        //   if(this.soal_ke == this.soal.length){
+        //     // alert("Selamat Anda Telah Menyelesaikan Level ini");
+        //     this.showHasil = true;
+        //     this.showSoal = false;
+        //     this.soal_ke = 0;
+        //     this.soal = [];
+            
+          }
+        
+      },
+
+
+})
+
+</script>
+</body>
+</html>
