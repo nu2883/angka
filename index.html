@@ -148,6 +148,7 @@
 </head>
 <body>
     <div id="app">
+        <!-- {{DataUser}} -->
         <span class="point">point : {{totalpoint}}</span> <br> <br>
         <div v-if="showWarning" class="warning">
             {{warning}}
@@ -180,175 +181,52 @@ point :  {{point}} -->
 
        <!-- FORM LOADING -->
 <div v-if="loading" class="loading text-center" >
-    <div @click="selesai" class="btnc">Close</div>
+    <!-- <div @click="selesai" class="btnc">Close</div> -->
     <h2 style="margin-top: 20vh; color:red;">Waktu Habis</h2>
     <h2 class="point">Total Point Anda :</h2>
     <h1 class="point">{{totalpoint}}</h1>
     <h3>Terima Kasih</h3>
-    <div class="btn1">Simpan Data</div>
+    <input v-model="nama" type="text" placeholder="Nama" autofocus>
+    <input v-model="kontak" type="text" placeholder="Nomor HP/email/Akun IG">
+    <br><br>
+    <div @click="simpanData" class="btn1">Simpan Data</div>
     
 </div>
+
+       <!-- FORM SCORE -->
+    <div v-if="showScore" class="loading text-center" >
+        <div @click="selesai" class="btnc">Close</div>
+        <h3 style="color:greenyellow;">Score Anda : {{totalpoint}}</h3>
+        <h2 style="margin-top: 4vh; color:blue;">10 SCORE TERATAS</h2>
+<!-- {{DataScore}} -->
+        
+            <div style="color:black;" v-for="a, index in DataScore">{{index+1}}. {{a.nama}}, score: {{a.score}}</div>
+            <!-- <table style="color:black;">
+                <tr>
+                    <th>No</th>
+                    <th>Nama</th>
+                    <th>Score</th>
+                </tr>
+                <tr v-for="a, index in DataScore">
+                    <td>{{index+1}}</td>
+                    <td>{{a.nama}}</td>
+                    <td>{{a.score}}</td>
+                </tr>
+            </table> -->
+        
+        
+    </div>
 
 
 
     </div>
-
-<<<<<<< HEAD
-<script src="js.js"></script>
-=======
-
-<script>
-
-var app = new Vue({
-  el: '#app',
-  data: {
-    message: 'Hello Vue!',
-    loading:false,
-    calc:'',
-    value:null,
-    angka1:0,
-    angka2:0,
-    kunci:'',
-    warning:'',
-    showWarning:false,
-    waktuawal:'',
-    waktujawab:[],
-    totalpoint:0,
-    start:true,
-    klik1:'',
-    klik2:'',
-    soal_ke:0,
-    
-
-  },
-  computed:{
-    point(){
-        let point1 = 0;
-        let po = 0;
-        let po1 = 0;
-        if(this.klik1  && this.klik2 ){
-            if(this.soal_ke % 2 == 0){
-                po = this.klik2 - this.klik1;
-                
-            }if(this.soal_ke % 2 != 0){
-                po = this.klik1 - this.klik2;
-            }
-            po1 = (10000-po);
-        }
-        point1 +=po1;
-        return point1 ;
-    }
-  },
-  methods:{
-      setMod(x){
-          this.calc += x+1
-      },
-      reset(){
-          this.value = null
-          this.calc = ''
-      },
-      clearWarning(){
-        this.showWarning = false;
-        this.warning = '';
-      },
-      enter(){
-        if(this.calc == this.kunci){
-            let wakt = new Date().getTime();
-            this.waktujawab.push(wakt);
-            
-
-            if(this.soal_ke % 2 == 0){
-                this.klik1 = wakt;
-            }if(this.soal_ke % 2 != 0){
-                this.klik2 = wakt;
-            }
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
 
 
-            
-            this.totalpoint += 10 ;
-            this.warning = '';
-            // alert('benar')
-            this.calc = ''
-            let angka1 = Math.floor(Math.random() * 9) + 1;
-            let angka2 = Math.floor(Math.random() * 9) + 1;
-            
-            this.angka1 = angka1;
-            this.angka2 = angka2;
-            this.kunci = angka1*angka2; 
-            
-            
-            this.soal_ke +=1;
-        }
-        else{
-        this.warning = 'Salah';
-        this.showWarning = true;
-        this.calc = '';
-        setTimeout(
-            this.clearWarning, 
-        2000);
-        }
+<script src="js.js" ></script>
 
 
-      },
-      mulai(){
-          let angka1 = Math.floor(Math.random() * 9) + 1;
-          let angka2 = Math.floor(Math.random() * 9) + 1;
-    
-          this.angka1 = angka1;
-          this.angka2 = angka2;
-          this.kunci = angka1*angka2;
 
-          let wakt = new Date().getTime();
-          this.klik2 = wakt;
-
-    
-      },
-      waktuhabis(){
-        // alert('waktuhabis')
-        this.loading = true;
-      },
-      mstart(){
-        this.start=false; 
-          this.calc = '';
-        this.mulai();
-        setTimeout(
-            this.waktuhabis, 
-        60000);
-        
-      },
-      selesai(){
-          this.loading = false;
-          this.totalpoint = 0;
-          this.angka1 = 0;
-          this.angka2 = 0;
-          this.klik1 = 0;
-          this.klik2 = 0;
-          this.start = true;
-          this.calc = '';
-
-    
-      }
-
-  },
-
-  watch: {
-        soal_ke(){
-            this.totalpoint += this.point;
-        //   if(this.soal_ke == this.soal.length){
-        //     // alert("Selamat Anda Telah Menyelesaikan Level ini");
-        //     this.showHasil = true;
-        //     this.showSoal = false;
-        //     this.soal_ke = 0;
-        //     this.soal = [];
-            
-          }
-        
-      },
-
-
-})
-
-</script>
->>>>>>> 2c6200dc021a48534049f9f881a436de973e94b5
 </body>
 </html>

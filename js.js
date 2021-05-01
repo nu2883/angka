@@ -3,7 +3,6 @@
 var app = new Vue({
   el: '#app',
   data: {
-    message: 'Hello Vue!',
     loading:false,
     calc:'',
     value:null,
@@ -19,6 +18,12 @@ var app = new Vue({
     klik1:'',
     klik2:'',
     soal_ke:0,
+    tanggal:new Date(),
+    DataUser:[],
+    nama:'',
+    kontak:'',
+    DataScore:[],
+    showScore:false,
     
 
   },
@@ -102,6 +107,31 @@ var app = new Vue({
           let wakt = new Date().getTime();
           this.klik2 = wakt;
 
+
+
+        //   ketika dimainkan
+        var vId = Date.now();
+        // var vUserName = this.UserName.toString();
+        // var vPassword = this.Password.toString();
+        var vNama = this.tanggal.toString();
+            // var lin = `https://script.google.com/macros/s/AKfycbxPUz9dizZwqWDEb05GHAEMIc36E4i8n8VK4d1vD189y8jR0SnExeWU7xYeUdVFNnVY/exec?action=insert&table=users&data={"id":${vId},"userName":"${vUserName}","Password":"${vPassword}","Nama":"${vNama}"}`;
+            var lin = `https://script.google.com/macros/s/AKfycby9VK3eyaJX2BbISPK2M_VODyLvRCkDVQSTnx6lz7YNEpeWWH1d-fT4Ce3oDodwNvwz/exec?action=insert&table=dimainkan&data={"timestamp":${vId},"tanggal":"${vNama}"}`;
+
+            // this.test = lin;
+            
+            $.ajax({
+            type: 'GET',
+            url: lin,
+            crossDomain: true,
+            dataType: 'jsonp',
+            dataType: "text",
+            success: function(resultData) { 
+                // app.register_form = false;
+                // app.loading=false;
+                // app.login();
+            }
+            });
+
     
       },
       waktuhabis(){
@@ -114,7 +144,7 @@ var app = new Vue({
         this.mulai();
         setTimeout(
             this.waktuhabis, 
-        60000);
+        10000);
         
       },
       selesai(){
@@ -126,9 +156,54 @@ var app = new Vue({
           this.klik2 = 0;
           this.start = true;
           this.calc = '';
+          this.showScore = false;
+      },
+      simpanData(){
+          if(this.nama && this.kontak){
+        var vId = Date.now();
+        var vNama = this.nama.toString();
+        var vKontak = this.kontak.toString();
+        var vScore = this.totalpoint.toString();
+        var vTanggal = this.tanggal.toString();
+            // var lin = `https://script.google.com/macros/s/AKfycbxPUz9dizZwqWDEb05GHAEMIc36E4i8n8VK4d1vD189y8jR0SnExeWU7xYeUdVFNnVY/exec?action=insert&table=users&data={"id":${vId},"userName":"${vUserName}","Password":"${vPassword}","Nama":"${vTanggal}"}`;
+            var lin = `https://script.google.com/macros/s/AKfycby9VK3eyaJX2BbISPK2M_VODyLvRCkDVQSTnx6lz7YNEpeWWH1d-fT4Ce3oDodwNvwz/exec?action=insert&table=score&data={"timestamp":${vId},"tanggal":"${vTanggal}","nama":"${vNama}","kontak":"${vKontak}","score":"${vScore}"}`;
 
-    
+            // this.test = lin;
+            
+            $.ajax({
+            type: 'GET',
+            url: lin,
+            crossDomain: true,
+            dataType: 'jsonp',
+            dataType: "text",
+            success: function(resultData) { 
+                // app.register_form = false;
+                // app.loading=false;
+                // app.login();
+                app.ambilScore();
+            }
+        });
+        // this.selesai();
+        this.showScore = true;
+        }
+        
+      },
+      ambilScore(){
+        //   alert('ambil data');
+        this.DataScore = [];
+
+        var url ="https://script.google.com/macros/s/AKfycby9VK3eyaJX2BbISPK2M_VODyLvRCkDVQSTnx6lz7YNEpeWWH1d-fT4Ce3oDodwNvwz/exec?action=read&table=query";
+
+        $.getJSON(url, function (json) {
+        // console.log(json.data);
+        app.DataScore = json.data;
+        });
+
+        // alert('selesai ambil data');
+
       }
+    
+
 
   },
 
@@ -146,25 +221,42 @@ var app = new Vue({
         
       },
       created(){
+        //   akses DB ketika diakses
+        var vId = Date.now();
+        // var vUserName = this.UserName.toString();
+        // var vPassword = this.Password.toString();
+        var vNama = this.tanggal.toString();
+            // var lin = `https://script.google.com/macros/s/AKfycbxPUz9dizZwqWDEb05GHAEMIc36E4i8n8VK4d1vD189y8jR0SnExeWU7xYeUdVFNnVY/exec?action=insert&table=users&data={"id":${vId},"userName":"${vUserName}","Password":"${vPassword}","Nama":"${vNama}"}`;
+            var lin = `https://script.google.com/macros/s/AKfycby9VK3eyaJX2BbISPK2M_VODyLvRCkDVQSTnx6lz7YNEpeWWH1d-fT4Ce3oDodwNvwz/exec?action=insert&table=diakses&data={"timestamp":${vId},"tanggal":"${vNama}"}`;
 
-                var waktu1 = Date.now();
-                // var lin = `https://script.google.com/macros/s/AKfycbzd5-oHv1vCIJvUuk-bwfnLPPUtaN8ZUQxxDDjo4V3QnzaTXUgPFrbqol4lIQubLdPX/exec?action=insert&table=dataSETORAN&data={"id":${waktu1},"Bulan":${sbulan}, "TGL_BUKU":"'${sTGL_BUKU}","NAMA_PENYETOR":"${this.PENYETOR}","NTPN":"'${sNTPN}","NTB":"'${sNTB}","NPWP":"${this.NPWP}","AKUN":"${this.AKUN}","NILAI_SETOR":"${this.NILAI}","LINK":"${this.LING}","BUPOT":" ","KET":" ","BILLING":" "}`;
-                var url = `https://script.google.com/macros/s/AKfycbxPUz9dizZwqWDEb05GHAEMIc36E4i8n8VK4d1vD189y8jR0SnExeWU7xYeUdVFNnVY/exec?action=update&table=inputFilter&id=1&data={"user":"${vUserName}"}`
-                this.test = url;
-                
-                $.ajax({
-                type: 'GET',
-                url: url,
-                crossDomain: true,
-                dataType: 'jsonp',
-                dataType: "text",
-                success: function(resultData) { 
-                    app.login_form = false;
-                    app.GetDataUser();
-                    app.GetData();
-                    app.loading=false;
-                }
-                });
+            // this.test = lin;
+            
+            $.ajax({
+            type: 'GET',
+            url: lin,
+            crossDomain: true,
+            dataType: 'jsonp',
+            dataType: "text",
+            success: function(resultData) { 
+                // app.register_form = false;
+                // app.loading=false;
+                // app.login();
+            }
+            });
+
+
+
+        // var url = `https://script.google.com/macros/s/AKfycby9VK3eyaJX2BbISPK2M_VODyLvRCkDVQSTnx6lz7YNEpeWWH1d-fT4Ce3oDodwNvwz/exec?action=insert&table=diakses&data={"timestamp":"123"}}`;
+
+        // this.DataUser = [];
+
+        // var url ="https://script.google.com/macros/s/AKfycby9VK3eyaJX2BbISPK2M_VODyLvRCkDVQSTnx6lz7YNEpeWWH1d-fT4Ce3oDodwNvwz/exec?action=read&table=diakses";
+
+        // $.getJSON(url, function (json) {
+        // // console.log(json.data);
+        // app.DataUser = json.data;
+        // });
+
       }
 
 
