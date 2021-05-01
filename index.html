@@ -178,12 +178,13 @@ point :  {{point}} -->
 
        <!-- FORM LOADING -->
 <div v-if="loading" class="loading text-center" >
+    <div @click="selesai" class="btnc">Close</div>
     <h2 style="margin-top: 20vh; color:red;">Waktu Habis</h2>
     <h2 class="point">Total Point Anda :</h2>
     <h1 class="point">{{totalpoint}}</h1>
     <h3>Terima Kasih</h3>
     <div class="btn1">Simpan Data</div>
-    <div @click="selesai" class="btnc">Close</div>
+    
 </div>
 
 
