@@ -140,6 +140,16 @@
             /* opacity: 0.4; */
             position: absolute;
         }
+        .overflowTest{
+            margin: auto;
+            /* background: #4CAF50; */
+            color: white;
+            padding: 15px;
+            width: 90%;
+            height: 250px;
+            overflow: scroll;
+            border: 1px solid #ccc;
+        }
 
 
 
@@ -200,7 +210,10 @@ point :  {{point}} -->
         <h3 style="margin-top: 4vh; color:blue;">10 SCORE TERATAS</h3>
 <!-- {{DataScore}} -->
         
+        <div class="overflowTest">
+            <!-- DataScore -->
             <div style="color:black;" v-for="a, index in DataScore">{{index+1}}. {{a.nama}}, score: {{a.score}}</div>
+        </div>
             <!-- <table style="color:black;">
                 <tr>
                     <th>No</th>
