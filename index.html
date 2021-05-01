@@ -1,10 +1,11 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Vue Calculator</title>
+    <title>Angka21</title>
     <!-- development version, includes helpful console warnings -->
     <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
 
@@ -28,7 +29,7 @@
             display: flex;
             justify-content: center;
             align-items: flex-end;
-            font-size: 20px;
+            font-size: 30px;
             text-align: center;
 
         }
@@ -62,7 +63,7 @@
             height: 63px;
             border: 1px solid transparent;
             line-height: 61px;
-            transition: all 0.8s;
+/*             transition: all 0.8s; */
             border-radius: 3px;
         }
         .btnc{
@@ -70,7 +71,7 @@
             height: 63px;
             border: 1px solid transparent;
             line-height: 61px;
-            transition: all 0.8s;
+/*             transition: all 0.8s; */
             border-radius: 3px;
             color:red;
         }
@@ -80,15 +81,15 @@
             border-color: rgba(252, 3, 3, 0.89);
             color: white;
             cursor: pointer;
-            transition: all 0.15s;
+/*             transition: all 0.15s; */
         }
         .btn1{
             flex: 0 0 93px;
             height: 63px;
             border: 1px solid transparent;
             line-height: 61px;
-            transition: all 0.8s;
-            border-radius: 3px;
+/*             transition: all 0.8s; */
+/*             border-radius: 3px; */
             color:greenyellow;
         }
 
@@ -97,7 +98,7 @@
             border-color: rgba(74, 252, 3, 0.89);
             color: white;
             cursor: pointer;
-            transition: all 0.15s;
+/*             transition: all 0.15s; */
         }
 
         .btn:hover{
@@ -105,7 +106,7 @@
             border-color: rgba(255, 255, 255, 0.2);
             color: white;
             cursor: pointer;
-            transition: all 0.15s;
+/*             transition: all 0.15s; */
         }
 
         .calc{
@@ -149,10 +150,8 @@
             {{warning}}
         </div>      
 <!-- <br>{{soal_ke}} soal ke
-
 <br>{{klik1}} klik1
 <br>{{klik2}} klik2
-
 point :  {{point}} -->
         <!-- {{showWarning}} -->
         <div class="calculator">
@@ -178,169 +177,19 @@ point :  {{point}} -->
 
        <!-- FORM LOADING -->
 <div v-if="loading" class="loading text-center" >
+    <div @click="selesai" class="btnc">Close</div>
     <h2 style="margin-top: 20vh; color:red;">Waktu Habis</h2>
     <h2 class="point">Total Point Anda :</h2>
     <h1 class="point">{{totalpoint}}</h1>
     <h3>Terima Kasih</h3>
     <div class="btn1">Simpan Data</div>
-    <div @click="selesai" class="btnc">Close</div>
+    
 </div>
 
 
 
     </div>
 
-
-<script>
-
-var app = new Vue({
-  el: '#app',
-  data: {
-    message: 'Hello Vue!',
-    loading:false,
-    calc:'',
-    value:null,
-    angka1:0,
-    angka2:0,
-    kunci:'',
-    warning:'',
-    showWarning:false,
-    waktuawal:'',
-    waktujawab:[],
-    totalpoint:0,
-    start:true,
-    klik1:'',
-    klik2:'',
-    soal_ke:0,
-    
-
-  },
-  computed:{
-    point(){
-        let point1 = 0;
-        let po = 0;
-        let po1 = 0;
-        if(this.klik1  && this.klik2 ){
-            if(this.soal_ke % 2 == 0){
-                po = this.klik2 - this.klik1;
-                
-            }if(this.soal_ke % 2 != 0){
-                po = this.klik1 - this.klik2;
-            }
-            po1 = (10000-po);
-        }
-        point1 +=po1;
-        return point1 ;
-    }
-  },
-  methods:{
-      setMod(x){
-          this.calc += x+1
-      },
-      reset(){
-          this.value = null
-          this.calc = ''
-      },
-      clearWarning(){
-        this.showWarning = false;
-        this.warning = '';
-      },
-      enter(){
-        if(this.calc == this.kunci){
-            let wakt = new Date().getTime();
-            this.waktujawab.push(wakt);
-            
-
-            if(this.soal_ke % 2 == 0){
-                this.klik1 = wakt;
-            }if(this.soal_ke % 2 != 0){
-                this.klik2 = wakt;
-            }
-
-
-            
-            this.totalpoint += 10 ;
-            this.warning = '';
-            // alert('benar')
-            this.calc = ''
-            let angka1 = Math.floor(Math.random() * 9) + 1;
-            let angka2 = Math.floor(Math.random() * 9) + 1;
-            
-            this.angka1 = angka1;
-            this.angka2 = angka2;
-            this.kunci = angka1*angka2; 
-            
-            
-            this.soal_ke +=1;
-        }
-        else{
-        this.warning = 'Salah';
-        this.showWarning = true;
-        this.calc = '';
-        setTimeout(
-            this.clearWarning, 
-        2000);
-        }
-
-
-      },
-      mulai(){
-          let angka1 = Math.floor(Math.random() * 9) + 1;
-          let angka2 = Math.floor(Math.random() * 9) + 1;
-    
-          this.angka1 = angka1;
-          this.angka2 = angka2;
-          this.kunci = angka1*angka2;
-
-          let wakt = new Date().getTime();
-          this.klik2 = wakt;
-
-    
-      },
-      waktuhabis(){
-        // alert('waktuhabis')
-        this.loading = true;
-      },
-      mstart(){
-        this.start=false; 
-        this.mulai();
-        setTimeout(
-            this.waktuhabis, 
-        60000);
-        
-      },
-      selesai(){
-          this.loading = false;
-          this.totalpoint = 0;
-          this.angka1 = 0;
-          this.angka2 = 0;
-          this.klik1 = 0;
-          this.klik2 = 0;
-          this.start = true;
-          this.calc = '';
-
-    
-      }
-
-  },
-
-  watch: {
-        soal_ke(){
-            this.totalpoint += this.point;
-        //   if(this.soal_ke == this.soal.length){
-        //     // alert("Selamat Anda Telah Menyelesaikan Level ini");
-        //     this.showHasil = true;
-        //     this.showSoal = false;
-        //     this.soal_ke = 0;
-        //     this.soal = [];
-            
-          }
-        
-      },
-
-
-})
-
-</script>
+<script src="js.js"></script>
 </body>
 </html>
