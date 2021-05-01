@@ -221,7 +221,7 @@ var app = new Vue({
         
       },
       created(){
-           alert("Dapat pulsa 25K untuk 5 score tertinggi")
+           alert("Dapat pulsa 25K untuk 5 score tertinggi (unik User)")
         //   akses DB ketika diakses
         var vId = Date.now();
         // var vUserName = this.UserName.toString();
