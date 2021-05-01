@@ -182,7 +182,7 @@ point :  {{point}} -->
        <!-- FORM LOADING -->
 <div v-if="loading" class="loading text-center" >
     <!-- <div @click="selesai" class="btnc">Close</div> -->
-    <h2 style="margin-top: 20vh; color:red;">Waktu Habis</h2>
+    <h2 style="margin-top: 10vh; color:red;">Waktu Habis</h2>
     <h2 class="point">Total Point Anda :</h2>
     <h1 class="point">{{totalpoint}}</h1>
     <h3>Terima Kasih</h3>
@@ -197,7 +197,7 @@ point :  {{point}} -->
     <div v-if="showScore" class="loading text-center" >
         <div @click="selesai" class="btnc">Close</div>
         <h3 style="color:greenyellow;">Score Anda : {{totalpoint}}</h3>
-        <h2 style="margin-top: 4vh; color:blue;">10 SCORE TERATAS</h2>
+        <h3 style="margin-top: 4vh; color:blue;">10 SCORE TERATAS</h3>
 <!-- {{DataScore}} -->
         
             <div style="color:black;" v-for="a, index in DataScore">{{index+1}}. {{a.nama}}, score: {{a.score}}</div>
