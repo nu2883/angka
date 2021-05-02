@@ -246,18 +246,11 @@ var app = new Vue({
             }
             });
 
-         alert("Dapat pulsa 25K untuk 5 score tertinggi (unik User)")
+            setTimeout(
+              alert("Dapat pulsa 25K untuk 5 score tertinggi (unik user)"), 
+          10);
 
-        // var url = `https://script.google.com/macros/s/AKfycby9VK3eyaJX2BbISPK2M_VODyLvRCkDVQSTnx6lz7YNEpeWWH1d-fT4Ce3oDodwNvwz/exec?action=insert&table=diakses&data={"timestamp":"123"}}`;
 
-        // this.DataUser = [];
-
-        // var url ="https://script.google.com/macros/s/AKfycby9VK3eyaJX2BbISPK2M_VODyLvRCkDVQSTnx6lz7YNEpeWWH1d-fT4Ce3oDodwNvwz/exec?action=read&table=diakses";
-
-        // $.getJSON(url, function (json) {
-        // // console.log(json.data);
-        // app.DataUser = json.data;
-        // });
 
       }
 
