@@ -222,7 +222,7 @@ var app = new Vue({
         
       },
       created(){
-           alert("Dapat pulsa 25K untuk 5 score tertinggi (unik User)")
+           
         //   akses DB ketika diakses
         var vId = Date.now();
         // var vUserName = this.UserName.toString();
@@ -246,7 +246,7 @@ var app = new Vue({
             }
             });
 
-
+         alert("Dapat pulsa 25K untuk 5 score tertinggi (unik User)")
 
         // var url = `https://script.google.com/macros/s/AKfycby9VK3eyaJX2BbISPK2M_VODyLvRCkDVQSTnx6lz7YNEpeWWH1d-fT4Ce3oDodwNvwz/exec?action=insert&table=diakses&data={"timestamp":"123"}}`;
 
