@@ -157,6 +157,7 @@ var app = new Vue({
           this.start = true;
           this.calc = '';
           this.showScore = false;
+          alert('Ayo coba lagi, untuk dapat SCORE lebih tinggi');
       },
       simpanData(){
           if(this.nama && this.kontak){
