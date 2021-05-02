@@ -4,6 +4,7 @@ var app = new Vue({
   el: '#app',
   data: {
     loading:false,
+    harusInput:false,
     calc:'',
     value:null,
     angka1:0,
@@ -166,6 +167,7 @@ var app = new Vue({
           this.showScore = false;
           this.tombolCloseSponsor = false;
           alert('Ayo coba lagi, untuk dapat SCORE lebih tinggi');
+          this.harusInput = false;
           
       },
       simpanData(){
@@ -197,6 +199,8 @@ var app = new Vue({
 
         this.showScore = true;
         }
+        
+      this.harusInput = true;
         
       },
       mshowSponsor(){
