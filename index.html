@@ -207,7 +207,9 @@ point :  {{point}} -->
     <h3>Terima Kasih</h3>
     <input v-model="nama" type="text" placeholder="Nama" autofocus>
     <input v-model="kontak" type="text" placeholder="Nomor HP/email/Akun IG">
-    <br><br>
+    <br>
+    <span v-if="harusInput" style="color:red" >Nama dan No HP/Email/AkunIG harus di isi</span>
+    <br>
     <div @click="simpanData" class="btn1">Simpan Data</div>
     
 </div>
