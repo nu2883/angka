@@ -268,12 +268,13 @@ var app = new Vue({
                 // app.register_form = false;
                 // app.loading=false;
                 // app.login();
+              setTimeout(
+                    alert("Dapat pulsa 25K untuk 5 score tertinggi (unik user)"), 
+                10);
             }
             });
 
-            setTimeout(
-              alert("Dapat pulsa 25K untuk 5 score tertinggi (unik user)"), 
-          10);
+
 
       }
 
