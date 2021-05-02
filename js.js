@@ -247,7 +247,7 @@ var app = new Vue({
         
       },
       created(){
-        alert("Dapat pulsa 25K untuk 5 score tertinggi (unik user)"
+        alert("Dapat pulsa 25K untuk 5 score tertinggi (unik user)";
         //   akses DB ketika diakses
         
         var vId = Date.now();
@@ -269,11 +269,7 @@ var app = new Vue({
                 // app.register_form = false;
                 // app.loading=false;
                 // app.login();
-//               setTimeout(
 
-//                          ), 
-//                 10);
-            }
             });
 
 
