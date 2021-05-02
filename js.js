@@ -271,7 +271,9 @@ var app = new Vue({
             }
             });
 
-      alert("Dapat pulsa 25K untuk 5 score tertinggi (unik user)");
+            setTimeout(
+              alert("Dapat pulsa 25K untuk 5 score tertinggi (unik user)"), 
+          10);
 
       }
 
