@@ -248,7 +248,7 @@ var app = new Vue({
       },
       created(){
         //   akses DB ketika diakses
-        alert("Dapat pulsa 25K untuk 5 score tertinggi")
+        alert("Dapat pulsa 25K untuk 5 score tertinggi (unik user");
         var vId = Date.now();
         // var vUserName = this.UserName.toString();
         // var vPassword = this.Password.toString();
