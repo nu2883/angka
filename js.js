@@ -222,6 +222,12 @@ var app = new Vue({
         
       },
       created(){
+        
+//                     setTimeout(
+//               alert("Dapat pulsa 25K untuk 5 score tertinggi (unik user)"), 
+//           10);
+        
+        alert("Dapat pulsa 25K untuk 5 score tertinggi (unik user), waktu game : 60 detik");
            
         //   akses DB ketika diakses
         var vId = Date.now();
@@ -246,9 +252,7 @@ var app = new Vue({
             }
             });
 
-            setTimeout(
-              alert("Dapat pulsa 25K untuk 5 score tertinggi (unik user)"), 
-          10);
+
 
 
 
