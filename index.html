@@ -174,9 +174,9 @@ point :  {{point}} -->
        <div class="calculator">
            {{calc}}
        </div>
-       <div class="value">
+<!--        <div class="value">
            {{value}}
-       </div>
+       </div> -->
 
        <div class="button">
            <div v-for="x in 9" @click="setMod(x-1)" class="btn">{{x}}</div>
@@ -184,7 +184,7 @@ point :  {{point}} -->
            <div @click="setMod(-1)" class="btn">0</div>
            <div v-if="start" @click="mstart()" class="btn1">Mulai</div>
            <div v-if="!start" @click="enter()" class="btn1">Jawab</div>
-           <div v-for=" x in 4"class="btn"></div>
+           <div v-for=" x in 1"class="btn"></div>
 
        </div>
 
