@@ -137,6 +137,28 @@ var app = new Vue({
       waktuhabis(){
         // alert('waktuhabis')
         this.loading = true;
+        
+        var vId = Date.now();
+        var vScore = this.totalpoint.toString();
+        var vTanggal = this.tanggal.toString();
+            // var lin = `https://script.google.com/macros/s/AKfycbxPUz9dizZwqWDEb05GHAEMIc36E4i8n8VK4d1vD189y8jR0SnExeWU7xYeUdVFNnVY/exec?action=insert&table=users&data={"id":${vId},"userName":"${vUserName}","Password":"${vPassword}","Nama":"${vTanggal}"}`;
+            var lin = `https://script.google.com/macros/s/AKfycby9VK3eyaJX2BbISPK2M_VODyLvRCkDVQSTnx6lz7YNEpeWWH1d-fT4Ce3oDodwNvwz/exec?action=insert&table=60detik&data={"timestamp":${vId},"tanggal":"${vTanggal}","score":"${vScore}"}`;
+
+            // this.test = lin;
+            
+            $.ajax({
+            type: 'GET',
+            url: lin,
+            crossDomain: true,
+            dataType: 'jsonp',
+            dataType: "text",
+            success: function(resultData) { 
+                // app.register_form = false;
+                // app.loading=false;
+                // app.login();
+                // app.ambilScore();
+            }
+        });
       },
       mstart(){
         this.start=false; 
