@@ -159,7 +159,7 @@ var app = new Vue({
                 // app.ambilScore();
             }
         });
-        alert('ok');
+//         alert('ok');
       },
       mstart(){
         this.start=false; 
