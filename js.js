@@ -250,7 +250,7 @@ var app = new Vue({
 //               alert("Dapat pulsa 25K untuk 5 score tertinggi (unik user)"), 
 //           10);
         
-        alert("Dapat pulsa 25K untuk 5 score tertinggi (unik user), waktu game : 60 detik, batas: 05-05-2021 (23:59)");
+//         alert("Dapat pulsa 25K untuk 5 score tertinggi (unik user), waktu game : 60 detik, batas: 05-05-2021 (23:59)");
            
         //   akses DB ketika diakses
         var vId = Date.now();
