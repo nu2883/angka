@@ -178,15 +178,15 @@ var app = new Vue({
         this.mulai();
         setTimeout(
             this.waktuhabis, 
-        10000);
+        60000);
         
         setTimeout(
           this.start = true, 
-        9910);
+        59900);
 
         setTimeout(
             this.ambilScore, 
-        5000);
+        55000);
         this.DataScore = [];
         this.$refs.cals.focus();
         
