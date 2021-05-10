@@ -249,6 +249,10 @@ var app = new Vue({
         
       },
       created(){
+        
+        this.loading = false;
+        this.showWarning = false;
+        this.showScore = false;
 
         alert("Waktu : 60 Detik");
            
