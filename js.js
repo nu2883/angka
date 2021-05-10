@@ -249,12 +249,7 @@ var app = new Vue({
         
       },
       created(){
-        
-//                     setTimeout(
-//               alert("Dapat pulsa 25K untuk 5 score tertinggi (unik user)"), 
-//           10);
-        
-//         alert("Dapat pulsa 25K untuk 5 score tertinggi (unik user), waktu game : 60 detik, batas: 05-05-2021 (23:59)");
+
         alert("Waktu : 60 Detik");
            
         //   akses DB ketika diakses
