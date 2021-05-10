@@ -157,19 +157,36 @@ var app = new Vue({
                 // app.register_form = false;
                 // app.loading=false;
                 // app.login();
-                app.ambilScore();
+                // app.ambilScore();
             }
         });
 //         alert('ok');
+
+        var vId = Date.now();
+        var vScore = this.totalpoint.toString();
+        var vTanggal = this.tanggal.toString();
+        let score = {'timestamp':	vId, tanggal: vTanggal,	score: vScore, warna:'red'};
+        this.DataScore.unshift(score);
       },
+      warna(a){
+        return a;
+      },
+
       mstart(){
         this.start=false; 
           this.calc = '';
         this.mulai();
         setTimeout(
             this.waktuhabis, 
-        60000);
+        10000);
+        
+        setTimeout(
+          this.start = true, 
+        9910);
 
+        setTimeout(
+            this.ambilScore, 
+        5000);
         this.DataScore = [];
         this.$refs.cals.focus();
         
@@ -250,10 +267,11 @@ var app = new Vue({
       },
       created(){
         
-        this.loading = false;
-        this.showWarning = false;
-        this.showScore = false;
-
+//                     setTimeout(
+//               alert("Dapat pulsa 25K untuk 5 score tertinggi (unik user)"), 
+//           10);
+        
+//         alert("Dapat pulsa 25K untuk 5 score tertinggi (unik user), waktu game : 60 detik, batas: 05-05-2021 (23:59)");
         alert("Waktu : 60 Detik");
            
         //   akses DB ketika diakses
