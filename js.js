@@ -180,9 +180,9 @@ var app = new Vue({
             this.waktuhabis, 
         60000);
         
-        setTimeout(
-          this.start = true, 
-        59900);
+//         setTimeout(
+//           this.start = true, 
+//         59900);
 
         setTimeout(
             this.ambilScore, 
