@@ -151,6 +151,19 @@
             border: 1px solid #ccc;
         }
 
+        input[type=text], select {
+  width: 100%;
+  /* padding: 12px 20px; */
+  /* margin: 8px 0; */
+  display: inline-block;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+  font-size: 40px;
+    font-weight: 400;
+    text-align: center;
+}
+
 
 
 
@@ -170,13 +183,17 @@ point :  {{point}} -->
         <!-- {{showWarning}} -->
         <div class="calculator">
             {{angka1}} x {{angka2}}
-        </div>        <br>
-       <div class="calculator">
+        </div>        
+        <br>
+       <!-- <div class="calculator">
            {{calc}}
-       </div>
-       <div class="value">
+       </div> -->
+       <form v-on:submit.prevent="enter()" class="calculator">
+           <input type="text"  autofocus v-model="calc" ref="cals">
+       </form>
+<!--        <div class="value">
            {{value}}
-       </div>
+       </div> -->
 
        <div class="button">
            <div v-for="x in 9" @click="setMod(x-1)" class="btn">{{x}}</div>
@@ -184,7 +201,7 @@ point :  {{point}} -->
            <div @click="setMod(-1)" class="btn">0</div>
            <div v-if="start" @click="mstart()" class="btn1">Mulai</div>
            <div v-if="!start" @click="enter()" class="btn1">Jawab</div>
-           <div v-for=" x in 4"class="btn"></div>
+           <div v-for=" x in 1"class="btn"></div>
 
        </div>
 
@@ -192,7 +209,7 @@ point :  {{point}} -->
        <!-- FORM LOADING -->
 <div v-if="loading" class="loading text-center" >
     <!-- <div @click="selesai" class="btnc">Close</div> -->
-    <h2 style="margin-top: 20vh; color:red;">Waktu Habis</h2>
+    <h2 style="margin-top: 10vh; color:red;">Waktu Habis</h2>
     <h2 class="point">Total Point Anda :</h2>
     <h1 class="point">{{totalpoint}}</h1>
     <h3>Terima Kasih</h3>
@@ -207,35 +224,33 @@ point :  {{point}} -->
     <div v-if="showScore" class="loading text-center" >
         <div @click="selesai" class="btnc">Close</div>
         <h3 style="color:greenyellow;">Score Anda : {{totalpoint}}</h3>
-        <h2 style="margin-top: 4vh; color:blue;">SCORE TERATAS</h2>
+<!--         <h3 style="margin-top: 4vh; color:blue;">SCORE TERATAS</h3> -->
+        <h3 style="margin-top: 4vh; color:blue;">100 SCORE TERBARU</h3>
+        
+<!-- {{DataScore}} -->
+        
         <div class="overflowTest">
-            <div style="color:black;" v-for="a, index in DataScore">{{index+1}}. {{a.nama}}, score: {{a.score}}</div>
+            <!-- DataScore -->
+            <div v-if="DataScore.length == []" ><h3>Load score terbaru ...</h3></div>
+            <div v-else style="color:black;" v-for="a, index in DataScore">{{index+1}}. score: {{a.score}}</div>
         </div>
+            <!-- <table style="color:black;">
+                <tr>
+                    <th>No</th>
+                    <th>Nama</th>
+                    <th>Score</th>
+                </tr>
+                <tr v-for="a, index in DataScore">
+                    <td>{{index+1}}</td>
+                    <td>{{a.nama}}</td>
+                    <td>{{a.score}}</td>
+                </tr>
+            </table> -->
+        
         
     </div>
 
-        <!-- FORM SHOW SPONSOR -->
-        <div v-if="showSponsor" class="loading text-center" >
-            <h2>Hadiah</h2>
-            <h1>{{hadiahSponsor}}</h1>
-            <h3>disponsori oleh :</h3> 
-            <a target="_blank" :href="urlIGSponsor">
-                <img width="150"  :src="imageSponsor" alt="">
-                <br>
-                <span>{{igSponsor}}</span>
-            </a>
-            <br><br>
-            
-            <div  v-if="tombolCloseSponsor" @click="showSponsor = false" class="btnc">Close</div>
-            
-            <a style="text-decoration: none;" target="_blank" href="https://www.instagram.com/bagi2giveway/">
-                <span style="background-color: chartreuse;" >* info Giveway selanjutnya FOLLOW @bagi2giveway *</span>
-                
-            </a>
 
-
-
-        </div>
 
     </div>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
