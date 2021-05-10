@@ -150,6 +150,9 @@
             overflow: scroll;
             border: 1px solid #ccc;
         }
+        .red{
+            background-color: lightblue;
+        }
 
         input[type=text], select {
   width: 100%;
@@ -189,7 +192,7 @@ point :  {{point}} -->
            {{calc}}
        </div> -->
        <form v-on:submit.prevent="enter()" class="calculator">
-           <input type="text"  autofocus v-model="calc" ref="cals">
+           <input type="text"  v-model="calc" ref="cals">
        </form>
 <!--        <div class="value">
            {{value}}
@@ -223,7 +226,7 @@ point :  {{point}} -->
        <!-- FORM SCORE -->
     <div v-if="showScore" class="loading text-center" >
         <div @click="selesai" class="btnc">Close</div>
-        <h3 style="color:greenyellow;">Score Anda : {{totalpoint}}</h3>
+        <h3 style="color:greenyellow;" class="red">Score Anda : {{totalpoint}}</h3>
 <!--         <h3 style="margin-top: 4vh; color:blue;">SCORE TERATAS</h3> -->
         <h3 style="margin-top: 4vh; color:blue;">100 SCORE TERBARU</h3>
         
@@ -232,7 +235,7 @@ point :  {{point}} -->
         <div class="overflowTest">
             <!-- DataScore -->
             <div v-if="DataScore.length == []" ><h3>Load score terbaru ...</h3></div>
-            <div v-else style="color:black;" v-for="a, index in DataScore">{{index+1}}. score: {{a.score}}</div>
+            <div v-else style="color:black;"  v-for="a, index in DataScore" :class="warna(a.warna)">{{index+1}}. score: {{a.score}}</div>
         </div>
             <!-- <table style="color:black;">
                 <tr>
